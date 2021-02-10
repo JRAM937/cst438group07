@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">438Project01</string>
     <string name="searchText">Search For Images!</string>
+    <string name="searchBarText">Enter a thing here</string>
+    <string name="searchButtonText">Search!</string>
+    <string name="leftButtonText">Left</string>
+    <string name="rightButtonText">Right</string>
+    <string name="randomButtonText">Random</string>
 </resources>

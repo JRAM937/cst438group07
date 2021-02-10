@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,63 +21,131 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchImageActivity extends AppCompatActivity  {
+    //private final int AMOUNT = 3;
 
-    private TextView textViewResult;
+    //private ImageView[] imageView = new ImageView[AMOUNT];
     private ImageView imageView;
+    private EditText searchBarText;
+    private Button searchButton;
+
+    private Button leftButton;
+    private Button rightButton;
+
+    private List<Image> hits;
+    private int index = 0;
 
     private String key = "5589438-47a0bca778bf23fc2e8c5bf3e";
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("https://pixabay.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    private PixabayAPI pixabayAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        textViewResult = findViewById(R.id.textViewResult);
-        imageView = findViewById(R.id.imageView);
+        /*
+        for(int i = 0; i < AMOUNT; i++) {
+            imageView[i] = findViewById(R.);
+        }*/
+
+        imageView = findViewById(R.id.image0);
+        searchBarText = findViewById(R.id.searchBar);
+        searchButton = findViewById(R.id.searchButton);
+        leftButton = findViewById(R.id.leftButton);
+        rightButton = findViewById(R.id.rightButton);
 
         //String url = "https://cdn.pixabay.com/photo/2013/05/07/08/46/paper-109277_150.jpg";
         //Picasso.with(this).load(url).into(imageView);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://pixabay.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        pixabayAPI = retrofit.create(PixabayAPI.class);
 
-        PixabayAPI pixabayAPI = retrofit.create(PixabayAPI.class);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String search = searchBarText.getText().toString();
 
+                if(search.isEmpty()) {
+                    searchForImages(key,"sun");
+                }
+                else {
+                    searchForImages(key, search);
+                }
+            }
+        });
+
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goLeft();
+            }
+        });
+
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goRight();
+            }
+        });
         //Call<ImageList> call = pixabayAPI.getImages(key,"anything");
-        Call<ImageList> call = pixabayAPI.getSome();
+
+    }
+
+    private void searchForImages(String key, String search) {
+        Call<ImageList> call = pixabayAPI.getImages(key, search);
 
         call.enqueue(new Callback<ImageList>() {
             @Override
             public void onResponse(Call<ImageList> call, Response<ImageList> response) {
-                if(!response.isSuccessful()) {
-                    textViewResult.setText("Code: " + response.code());
+                if (!response.isSuccessful()) {
+                    Log.d("Fail", Integer.toString(response.code()));
                     return;
                 }
 
                 ImageList images = response.body();
-                List<Image> hits = images.getHits();
+                hits = images.getHits();
 
-                for(Image image : hits) {
-                    String content = "";
-                    content += "ID: " + image.getId() + "\n";
-                    content += "User ID: " + image.getPageURL() + "\n";
-                    content += "Title: " + image.getTags() + "\n";
-                    content += "Text: " + image.getType() + "\n\n";
-
-                    String url = image.getPreviewURL();
-                    Picasso.with(SearchImageActivity.this).load(url).into(imageView);
-
-                    textViewResult.append(content);
-                }
+                index = 0;
+                String url = hits.get(index).getPreviewURL();
+                Picasso.with(SearchImageActivity.this).load(url)
+                        .resize(0,500)
+                        .into(imageView);
             }
 
             @Override
             public void onFailure(Call<ImageList> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
-                Log.d("Hello", "oh it fails");
+                Log.d("Fail", t.getMessage());
             }
         });
+    }
+
+    private void goLeft() {
+        if(!hits.isEmpty()) {
+            index--;
+            if (index < 0)
+                index += hits.size();
+
+            String url = hits.get(index).getPreviewURL();
+            Picasso.with(SearchImageActivity.this).load(url)
+                    .resize(0, 500)
+                    .into(imageView);
+        }
+    }
+
+    private void goRight() {
+        if(!hits.isEmpty()) {
+            index++;
+            if (index >= hits.size())
+                index -= hits.size();
+
+            String url = hits.get(index).getPreviewURL();
+            Picasso.with(SearchImageActivity.this).load(url)
+                    .resize(0, 500)
+                    .into(imageView);
+        }
     }
 }
