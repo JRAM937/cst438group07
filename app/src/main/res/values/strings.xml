@@ -3,5 +3,8 @@
     <string name="login">Login Here</string>
     <string name="usernameHint">Enter your username here</string>
     <string name="passwordHint">Enter your password here</string>
+
+    <string name="createAccButton">Create an Account</string>
+    <string name="searchButton">Search</string>
     <string name="loginButton">Login</string>
 </resources>
