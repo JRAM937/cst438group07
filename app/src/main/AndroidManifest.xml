@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.438Project01">
+        <activity android:name=".CreateAccountActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,6 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< Updated upstream
+=======
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".LandingActivity" />
+        <activity android:name=".SettingsActivity" />
+>>>>>>> Stashed changes
     </application>
 
 </manifest>
