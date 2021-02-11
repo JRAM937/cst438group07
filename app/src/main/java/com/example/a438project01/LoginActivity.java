@@ -113,5 +113,4 @@ public class LoginActivity extends AppCompatActivity {
 
         mAccountDAO.addAccount(account);
     }
-
 }
