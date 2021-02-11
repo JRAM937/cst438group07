@@ -65,9 +65,6 @@ public class SearchImageActivity extends AppCompatActivity  {
         leftButton = findViewById(R.id.leftButton);
         rightButton = findViewById(R.id.rightButton);
 
-        //String url = "https://cdn.pixabay.com/photo/2013/05/07/08/46/paper-109277_150.jpg";
-        //Picasso.with(this).load(url).into(imageView);
-
         pixabayAPI = retrofit.create(PixabayAPI.class);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +94,6 @@ public class SearchImageActivity extends AppCompatActivity  {
                 goRight();
             }
         });
-        //Call<ImageList> call = pixabayAPI.getImages(key,"anything");
-
     }
 
     private void searchForImages(String key, String search) {
