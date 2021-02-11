@@ -1,4 +1,4 @@
-package com.example.a438project01;
+package com.example.a438project01.db;
 
 import android.content.Context;
 
@@ -12,11 +12,18 @@ import androidx.room.Query;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.a438project01.Account;
+
 @Database(entities = {Account.class}, version = 1, exportSchema = false)
 public abstract class AccountDatabase extends RoomDatabase {
-    public abstract AccountDao account();
-    private static AccountDatabase sInstance;
-    public static synchronized AccountDatabase getInstance(Context context) {
+    //private static AccountDatabase sInstance;
+
+    public static final String DB_NAME = "USER_DATABASE";
+    public static final String USER_TABLE = "USER_TABLE";
+
+    public abstract AccountDAO getAccountDAO();
+
+/*    public static synchronized AccountDatabase getInstance(Context context) {
         if (sInstance == null) {
             sInstance = Room
                     .databaseBuilder(context.getApplicationContext(),
@@ -26,7 +33,7 @@ public abstract class AccountDatabase extends RoomDatabase {
                     .build();
         }
         return sInstance;
-    }
+    }*/
 
     /* populateInitialData is not used yet, may use it in future
     public void populateInitialData() {
@@ -34,20 +41,7 @@ public abstract class AccountDatabase extends RoomDatabase {
     }
      */
 
-    @Dao
-    public interface AccountDao {
-        @Insert
-        void addAccount(Account account);
 
-        @Query("SELECT COUNT(*) FROM accounts")
-        int count();
-
-        @Query("SELECT * FROM accounts")
-        List<Account> getAll();
-
-        @Delete
-        void delete(Account account);
-    }
 
 
 }

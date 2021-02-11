@@ -5,7 +5,9 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "accounts")
+import com.example.a438project01.db.AccountDatabase;
+
+@Entity(tableName = AccountDatabase.USER_TABLE)
 public class Account {
     @PrimaryKey(autoGenerate=true)
     private int accountId;
