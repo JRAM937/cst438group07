@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        searchButton.setOnClickListener(v -> {
+            Intent intent = SearchImageActivity.intentFactory(getApplicationContext());
+            startActivity(intent);
+        });
+
     }
 
     public void wireupButtons() {
