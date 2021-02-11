@@ -2,6 +2,8 @@ package com.example.a438project01;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +44,10 @@ public class SearchImageActivity extends AppCompatActivity  {
             .build();
 
     private PixabayAPI pixabayAPI;
+
+    public static Intent intentFactory(Context context) {
+        return new Intent(context, SearchImageActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
