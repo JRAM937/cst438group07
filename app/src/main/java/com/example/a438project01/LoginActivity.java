@@ -23,16 +23,74 @@ public class LoginActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String USERNAME = "username";
 
-    private String mUsername;
-    private String mPassword;
+    private String mUsername; //Holds username converted from editText to String
+    private String mPassword; //Holds password converted from editText to String
 
+    //user input fields
     private EditText usernameInput;
     private EditText passwordInput;
     private Button loginButton;
 
+    //Database objects
     private AccountDAO mAccountDAO;
     private Account mAccount;
-    List<Account> mAccounts;
+    List < Account > mAccounts;
+
+
+    //The following are some helper functtions to be called in the onCreate method
+
+    //Get the singular instance of the database
+    private void getDatabase() {
+        mAccountDAO = Room.databaseBuilder(this, AccountDatabase.class, AccountDatabase.DB_NAME)
+                .allowMainThreadQueries()
+                .build()
+                .getAccountDAO();
+    }
+
+
+    //Convert edit text to string
+    private void getUserInput() {
+        mUsername = usernameInput.getText().toString();
+        mPassword = passwordInput.getText().toString();
+    }
+
+
+    //Search for user in database. Returns false if username does not exist in database.
+    private boolean validateUser() {
+        //Retrieve the account from the database if it exists
+        mAccount = mAccountDAO.getUserByUsername(mUsername);
+
+        if (mAccount == null) {
+            Toast.makeText(this, "No user " + mUsername + " found. ", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    //Search for password in database. Returns false if password doesn't exist
+    private boolean validatePassword() {
+        return mAccount.getPassword().equals(mPassword);
+    }
+
+
+    //Creates new intent for this activity
+    public static Intent intentFactory(Context context) {
+        return new Intent(context, LoginActivity.class);
+    }
+
+
+    //Username and password for testing purposes only
+    private void testUsers() {
+        Account account = new Account("test", "password");
+        mAccount = account;
+
+        mAccountDAO.addAccount(account);
+    }
+
+    //Obtain all users from the database
+    private void getUsers() {
+        mAccounts = mAccountDAO.getAll();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -44,20 +102,12 @@ public class LoginActivity extends AppCompatActivity {
         testUsers();
         getUsers();
 
-
         wireDisplay();
 
     }
 
-    private void getDatabase() {
-        mAccountDAO = Room.databaseBuilder(this, AccountDatabase.class, AccountDatabase.DB_NAME)
-                .allowMainThreadQueries()
-                .build()
-                .getAccountDAO();
-    }
 
-    private void getUsers() { mAccounts = mAccountDAO.getAll(); }
-
+    //Logic for username/password check
     private void wireDisplay() {
         usernameInput = findViewById(R.id.editText_username);
         passwordInput = findViewById(R.id.editText_password);
@@ -66,11 +116,12 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getValuesFromDisplay();
 
-                if (checkForUserInDatabase()) {
-                    if(!validatePassword()) {
-                        Toast.makeText(LoginActivity.this, "Invalid password.", Toast.LENGTH_SHORT).show();
+                getUserInput(); //Call helper function to turn user input into strings. Values saved in mUsername and mPassword
+
+                if (validateUser()) {
+                    if (!validatePassword()) {
+                        Toast.makeText(LoginActivity.this, "Invalid Password. Please Try Again", Toast.LENGTH_SHORT).show();
                     } else {
                         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -81,36 +132,12 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = LandingActivity.intentFactory(getApplicationContext());
                         startActivity(intent);
                     }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Invalid Username. Please Try Again", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void getValuesFromDisplay() {
-        mUsername = usernameInput.getText().toString();
-        mPassword = passwordInput.getText().toString();
-    }
 
-    private boolean checkForUserInDatabase() {
-        mAccount = mAccountDAO.getUserByUsername(mUsername);
-
-        if (mAccount == null) {
-            Toast.makeText(this, "No user " + mUsername + " found. ", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        return true;
-    }
-
-    private boolean validatePassword() { return mAccount.getPassword().equals(mPassword); }
-
-    public static Intent intentFactory(Context context) {
-        return new Intent(context, LoginActivity.class);
-    }
-
-    private void testUsers() {
-        Account account = new Account("test", "password");
-        mAccount = account;
-
-        mAccountDAO.addAccount(account);
-    }
 }
