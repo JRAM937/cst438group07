@@ -50,13 +50,4 @@ public abstract class AccountDatabase extends RoomDatabase {
         }
         return sInstance;
     }
-
-    private void loadUsers(Context context){
-        AccountDAO dao = getInstance(context).dao;
-
-        Account testAcc = new Account("testUser", "testPass");
-        dao.addAccount(testAcc);
-    }
-
-
 }
