@@ -14,8 +14,8 @@
         <activity android:name=".SettingsActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".LandingActivity" />
-        <activity android:name=".SearchImageActivity"></activity>
-        <activity android:name=".CreateAccountActivity"></activity>
+        <activity android:name=".SearchImageActivity" />
+        <activity android:name=".CreateAccountActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

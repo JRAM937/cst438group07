@@ -31,12 +31,11 @@ public class CreateAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_create_account);
 
         setTitle("PicPanda - Create Account Page");
         getDatabase();
         getUsers();
-
 
         wireDisplay();
 
@@ -61,17 +60,15 @@ public class CreateAccountActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getValuesFromDisplay();
 
-                if (checkForUserInDatabase()) {
-                    if (!validateUsername()) {
-                        Toast.makeText(CreateAccountActivity.this, "Username already exists.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        mAccountDAO.addAccount(new Account(mUsername, mPassword));
+                if (!validateUsername()) {
+                    Toast.makeText(CreateAccountActivity.this, "Username already exists.", Toast.LENGTH_SHORT).show();
+                } else {
+                    mAccountDAO.addAccount(new Account(mUsername, mPassword));
 
-                        Toast.makeText(CreateAccountActivity.this, "Account created.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateAccountActivity.this, "Account created.", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = LoginActivity.intentFactory(getApplicationContext());
-                        startActivity(intent);
-                    }
+                    Intent intent = LoginActivity.intentFactory(getApplicationContext());
+                    startActivity(intent);
                 }
             }
         });
@@ -82,20 +79,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         mPassword = passwordInput.getText().toString();
     }
 
-    private boolean checkForUserInDatabase() {
-        mAccount = mAccountDAO.getUserByUsername(mUsername);
-
-        if (mAccount == null) {
-            Toast.makeText(this, "No user " + mUsername + " found. ", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        return true;
-    }
-
     // Returns true if the username isn't already used in the database
     private boolean validateUsername() { return mAccountDAO.getUserByUsername(mUsername) == null; }
 
     public static Intent intentFactory(Context context) {
-        return new Intent(context, LoginActivity.class);
+        return new Intent(context, CreateAccountActivity.class);
     }
 }
