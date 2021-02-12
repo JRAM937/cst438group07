@@ -16,7 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         setTitle("PicPanda - App Settings");
 
-        Button logoutButton = findViewById(R.id.delete_acc_button);
+        Button logoutButton = findViewById(R.id.logout_button);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
