@@ -61,8 +61,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 mAccountDAO.update(mAccount);
 
                 Intent intent = ProfileActivity.intentFactory(getApplicationContext());
-                String edit = "changed";
-                intent.putExtra("changed", edit);
                 finish();
                 startActivity(intent);
             }

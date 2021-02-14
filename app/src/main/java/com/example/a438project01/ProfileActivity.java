@@ -55,21 +55,13 @@ public class ProfileActivity extends AppCompatActivity {
         String profilePage = user + "'s Profile Page";
         profileName.setText(profilePage);
 
-        //Check for intent extras
-        Intent prevIntent = getIntent();
-        prevIntent.getExtras();
-
-        //Display toast based on the extra
-        if(prevIntent.hasExtra("changed")) {
-            Toast.makeText(ProfileActivity.this, "Bio has been edited.", Toast.LENGTH_SHORT).show();
-        }
-
         profileBio.setText(returnBio(mAccount));
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = EditProfileActivity.intentFactory(getApplicationContext());
+                finish();
                 startActivity(intent);
             }
         });
