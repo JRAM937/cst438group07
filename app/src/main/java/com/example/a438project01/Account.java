@@ -18,8 +18,11 @@ public class Account {
     @ColumnInfo(name = "password")
     private String Password;
 
+    private String Bio;
+
     public Account(String Username, String Password) {
         this.Username = Username; this.Password = Password;
+        this.Bio = "";
     }
 
     public int getAccountId() {
@@ -44,6 +47,14 @@ public class Account {
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+    public String getBio() {
+        return Bio;
+    }
+
+    public void setBio(String bio) {
+        Bio = bio;
     }
 }
 

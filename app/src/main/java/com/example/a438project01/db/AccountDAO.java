@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.a438project01.Account;
 
@@ -14,6 +15,9 @@ public interface AccountDAO {
 
     @Insert
     void addAccount(Account account);
+
+    @Update
+    void update(Account account);
 
     @Delete
     void delete(Account account);

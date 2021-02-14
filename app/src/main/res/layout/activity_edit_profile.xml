@@ -7,16 +7,17 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/editTextBio"
         android:layout_width="351dp"
         android:layout_height="109dp"
         android:hint="@string/bioHint"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/saveButton"

@@ -13,6 +13,7 @@
     <string name="editProfile">Edit Profile</string>
     <string name="bioHint">Start typing here</string>
     <string name="saveButton">Save</string>
+    <string name="settingsButton">Settings</string>
 
     <string name="searchBarText">Enter a thing here</string>
     <string name="searchButtonText">Search!</string>

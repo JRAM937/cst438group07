@@ -18,6 +18,7 @@ public class LandingActivity extends AppCompatActivity {
     private TextView welcome;
     private Button searchButton;
     private Button profileButton;
+    private Button settingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +52,21 @@ public class LandingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SettingsActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     public void wireupButtons() {
         welcome = findViewById(R.id.landingTextView);
         searchButton = findViewById(R.id.landingSearchButton);
         profileButton = findViewById(R.id.landingProfileButton);
+        settingsButton = findViewById(R.id.settingsButton);
     }
 
     public static Intent intentFactory(Context context) {
