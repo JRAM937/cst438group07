@@ -33,7 +33,7 @@ public class LandingActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         String user = sharedPreferences.getString(USERNAME, "");
 
-        String welcomeString = "Thanks for logging in " + user + "!";
+        String welcomeString = "Thanks for logging in, " + user + "!";
         welcome.setText(welcomeString);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +47,8 @@ public class LandingActivity extends AppCompatActivity {
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Go to profile page
+                Intent intent = ProfileActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
     }
