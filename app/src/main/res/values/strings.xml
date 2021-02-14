@@ -8,6 +8,7 @@
     <string name="createAccButton">Create an Account</string>
     <string name="searchButton">Search</string>
     <string name="loginButton">Login</string>
+    <string name="profileButton">Profile Page</string>
 
     <string name="searchBarText">Enter a thing here</string>
     <string name="searchButtonText">Search!</string>
