@@ -33,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        createAccButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CreateAccountActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
         searchButton.setOnClickListener(v -> {
             Intent intent = SearchImageActivity.intentFactory(getApplicationContext());
             startActivity(intent);
