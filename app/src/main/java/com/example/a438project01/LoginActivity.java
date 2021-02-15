@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     List < Account > mAccounts;
 
 
-    //The following are some helper functtions to be called in the onCreate method
+    //The following are some helper functions to be called in the onCreate method
 
     //Get the singular instance of the database
     private void getDatabase() {
