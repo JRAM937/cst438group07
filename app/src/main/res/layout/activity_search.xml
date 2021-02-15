@@ -31,17 +31,17 @@
 
     <EditText
         android:id="@+id/searchBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="124dp"
+        android:layout_height="46dp"
         android:ems="10"
         android:hint="@string/searchBarText"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.193"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintVertical_bias="0.115" />
 
     <Button
         android:id="@+id/searchButton"
@@ -49,8 +49,18 @@
         android:layout_height="wrap_content"
         android:text="@string/searchButtonText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toEndOf="@+id/searchBar"
+        app:layout_constraintTop_toTopOf="@+id/searchBar" />
+
+    <Button
+        android:id="@+id/randomSearchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/randomButtonText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toEndOf="@+id/searchButton"
         app:layout_constraintTop_toTopOf="@+id/searchBar" />
 
     <Button
@@ -75,5 +85,25 @@
         app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toEndOf="@+id/image0"
         app:layout_constraintTop_toTopOf="@+id/image0" />
+
+    <Button
+        android:id="@+id/randomImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/randomButtonText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image0" />
+
+    <TextView
+        android:id="@+id/imageIndexText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/imageIndexText"
+        app:layout_constraintBottom_toTopOf="@+id/image0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

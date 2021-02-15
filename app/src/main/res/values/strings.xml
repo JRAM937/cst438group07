@@ -12,4 +12,6 @@
     <string name="searchButtonText">Search!</string>
     <string name="leftButtonText">Left</string>
     <string name="rightButtonText">Right</string>
+    <string name="randomButtonText">Random</string>
+    <string name="imageIndexText">0 / 0</string>
 </resources>
