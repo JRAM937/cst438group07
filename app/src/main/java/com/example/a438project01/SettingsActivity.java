@@ -1,12 +1,15 @@
 package com.example.a438project01;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.a438project01.db.AccountDAO;
@@ -24,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
     List< Account > mAccounts;
 
 
-    //The following are some helper functtions to be called in the onCreate method
+    //The following are some helper functions to be called in the onCreate method
 
     //Get the singular instance of the database
     private void getDatabase() {
@@ -69,6 +72,28 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = MainActivity.intentFactory(getApplicationContext());
                 startActivity(intent);
+            }
+        });
+        
+        
+        //Easter Egg that takes you to an interesting Pokemon video
+        Button easterEgg = findViewById(R.id.e_egg_button);
+
+        easterEgg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri youtubeVideo = Uri.parse("https://www.youtube.com/watch?v=EE-xtCF3T94");
+                Intent visitLink = new Intent(Intent.ACTION_VIEW, youtubeVideo);
+                startActivity(visitLink);
+            }
+        });
+
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch notiSwitch = findViewById(R.id.noti_switch);
+
+        notiSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Does Something
             }
         });
 

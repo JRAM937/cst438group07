@@ -44,5 +44,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Back" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <Switch
+            android:id="@+id/noti_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notifications On/Off" />
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <Button
+            android:id="@+id/e_egg_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Easter Egg! (Click Me)" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
