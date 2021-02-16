@@ -16,6 +16,9 @@ public interface PixabayAPI {
             @Query("q") String tag
     );
 
-    @GET("api/?key=5589438-47a0bca778bf23fc2e8c5bf3e&q=sun")
-    Call<ImageList> getSome();
+    @GET("api/")
+    Call<ImageList> getCategory(
+            @Query("key") String key,
+            @Query("category") String category
+    );
 }
