@@ -97,6 +97,16 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        //Logic for Back Button
+        Button backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = LandingActivity.intentFactory(getApplicationContext());
+                startActivity(i);
+            }
+        });
+
         deleteAccButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
