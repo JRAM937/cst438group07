@@ -22,7 +22,6 @@ public abstract class AccountDatabase extends RoomDatabase {
 
     public static final String DB_NAME = "USER_DATABASE";
     public static final String USER_TABLE = "USER_TABLE";
-    public static final boolean noti = true; //Controls notifiaction settings for users
 
     private AccountDAO dao;
 
