@@ -18,11 +18,15 @@ public class Account {
     @ColumnInfo(name = "password")
     private String Password;
 
+    @ColumnInfo(name = "notifications")
+    private boolean isNotif;
+
     private String Bio;
 
     public Account(String Username, String Password) {
         this.Username = Username; this.Password = Password;
         this.Bio = "";
+        isNotif = true;
     }
 
     public int getAccountId() {
@@ -48,6 +52,10 @@ public class Account {
     public void setPassword(String password) {
         Password = password;
     }
+
+    public boolean isNotif() { return isNotif; }
+
+    public void setNotif(boolean notif) { isNotif = notif; }
 
     public String getBio() {
         return Bio;
