@@ -22,22 +22,11 @@ public abstract class AccountDatabase extends RoomDatabase {
 
     public static final String DB_NAME = "USER_DATABASE";
     public static final String USER_TABLE = "USER_TABLE";
+    public static final boolean noti = true; //Controls notifiaction settings for users
 
     private AccountDAO dao;
 
     public abstract AccountDAO getAccountDAO();
-
-//    public static synchronized AccountDatabase getInstance(Context context) {
-//        if (sInstance == null) {
-//            sInstance = Room
-//                    .databaseBuilder(context.getApplicationContext(),
-//                            AccountDatabase.class,
-//                            "users.db")
-//                    .allowMainThreadQueries()
-//                    .build();
-//        }
-//        return sInstance;
-//    }
 
     public static AccountDatabase getInstance(final Context context) {
         if (sInstance == null) {
