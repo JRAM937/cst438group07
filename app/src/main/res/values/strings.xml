@@ -14,6 +14,8 @@
     <string name="bioHint">Start typing here</string>
     <string name="saveButton">Save</string>
     <string name="settingsButton">Settings</string>
+    <string name="guestButton">Login as Guest</string>
+    <string name="backButton">Back</string>
 
     <string name="searchBarText">Enter a thing here</string>
     <string name="searchButtonText">Search!</string>

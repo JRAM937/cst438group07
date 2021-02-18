@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -29,10 +30,17 @@ public class SearchImageActivity extends AppCompatActivity  {
                                         "industry","computer","food","sports","transportation",
                                         "travel","buildings","business","music"};
 
+    // Shared Preferences
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String USERNAME = "username";
+    public static final String GUEST = "guest";
+
     private ImageView imageView;
     private EditText searchBarText;
     private Button searchButton;
+    private Button backButton;
     private TextView imageIndexText;
+    private TextView userTextView;
 
     private List<Image> hits = new ArrayList<Image>();
     private int index = 0;
@@ -54,6 +62,14 @@ public class SearchImageActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        setTitle("PicPanda - Search Image");
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        String user = sharedPreferences.getString(USERNAME, "");
+        // Use isGuest for favoriting image. if isGuest is true do not allow the user to favorite an image.
+        // Going back should also go back to the MainActivity and not the LandingPage
+        boolean isGuest = sharedPreferences.getBoolean(GUEST, false);
+
         Button leftButton;
         Button rightButton;
         Button randomSearchButton;
@@ -62,11 +78,16 @@ public class SearchImageActivity extends AppCompatActivity  {
         imageView = findViewById(R.id.image0);
         searchBarText = findViewById(R.id.searchBar);
         searchButton = findViewById(R.id.searchButton);
+        backButton = findViewById(R.id.backButton);
         imageIndexText = findViewById(R.id.imageIndexText);
+        userTextView = findViewById(R.id.userTextView);
         leftButton = findViewById(R.id.leftButton);
         rightButton = findViewById(R.id.rightButton);
         randomSearchButton = findViewById(R.id.randomSearchButton);
         randomImageButton = findViewById(R.id.randomImageButton);
+
+        // Displays image at the top of the page
+        userTextView.setText("Searching for image as " + user);
 
         pixabayAPI = retrofit.create(PixabayAPI.class);
 
@@ -84,6 +105,17 @@ public class SearchImageActivity extends AppCompatActivity  {
         randomSearchButton.setOnClickListener(v -> {
             randomSearch();
             goRandom();
+        });
+
+        backButton.setOnClickListener(v -> {
+            // If the user is a guest it should always go back to the MainActivity since it doesn't have a landing page
+            if (isGuest) {
+                Intent intent = MainActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            } else {
+                Intent intent = LandingActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            }
         });
 
         leftButton.setOnClickListener(v -> goLeft());

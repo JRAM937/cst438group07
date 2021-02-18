@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -22,9 +23,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    //Shared Preferences
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String USERNAME = "username";
+
     //Database objects
     private AccountDAO mAccountDAO;
-    private Account mAccount;
     List< Account > mAccounts;
 
 
@@ -43,27 +48,18 @@ public class SettingsActivity extends AppCompatActivity {
         mAccounts = mAccountDAO.getAll();
     }
 
-    /* Note: This is only for testing out the settings page. The final product should pass in the Account
-     * That's currently logged in. This is only for testing purposes until that is implemented.
-     * When it is please remove this method and any times its called.
-     */
-    private void testUsers() {
-        Account account = new Account("settingstest", "password");
-        mAccount = account;
-
-        mAccountDAO.addAccount(account);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_settings);
 
         getDatabase();
-        testUsers();
         getUsers();
 
         setTitle("PicPanda - App Settings");
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        String user = sharedPreferences.getString(USERNAME, "");
 
         Button logoutButton = findViewById(R.id.logout_button);
         Button deleteAccButton = findViewById(R.id.delete_acc_button);
@@ -123,8 +119,8 @@ public class SettingsActivity extends AppCompatActivity {
                 deleteAccPopup.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        mAccountDAO.delete(mAccountDAO.getUserByUsername(mAccount.getUsername()));
-                        Toast.makeText(SettingsActivity.this, "Account " + mAccount.getUsername() + " deleted.", Toast.LENGTH_SHORT).show();
+                        mAccountDAO.delete(mAccountDAO.getUserByUsername(user));
+                        Toast.makeText(SettingsActivity.this, "Account " + user + " deleted.", Toast.LENGTH_SHORT).show();
 
                         Intent intent = MainActivity.intentFactory(getApplicationContext());
                         startActivity(intent);
