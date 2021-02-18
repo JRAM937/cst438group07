@@ -14,6 +14,18 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private Button createAccButton;
 
+    //Controls if notifications are to be showed or not
+    private boolean notis = true;
+
+    //Get and Set methods for notis when favoriting an image
+    public boolean isNotis() {
+        return notis;
+    }
+
+    public void setNotis(boolean notis) {
+        this.notis = notis;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
