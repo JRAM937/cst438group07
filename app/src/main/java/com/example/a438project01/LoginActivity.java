@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String USERNAME = "username";
+    public static final String GUEST = "guest";
 
     private String mUsername; //Holds username converted from editText to String
     private String mPassword; //Holds password converted from editText to String
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usernameInput;
     private EditText passwordInput;
     private Button loginButton;
+    private Button guestButton;
 
     //Database objects
     private AccountDAO mAccountDAO;
@@ -113,6 +115,8 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.editText_password);
 
         loginButton = findViewById(R.id.loginButton2);
+        guestButton = findViewById(R.id.guestButton);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
 
                         editor.putString(USERNAME, usernameInput.getText().toString());
+                        editor.putBoolean(GUEST, false);
                         editor.apply();
 
                         Intent intent = LandingActivity.intentFactory(getApplicationContext());
@@ -135,6 +140,22 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "Invalid Username. Please Try Again", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        guestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                // TODO: add a random name generator at some point. Low priority
+                editor.putString(USERNAME, "Rando Calrissian");
+                editor.putBoolean(GUEST, true);
+                editor.apply();
+
+                Intent intent = SearchImageActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
     }

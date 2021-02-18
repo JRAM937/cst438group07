@@ -10,7 +10,6 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button searchButton;
     private Button loginButton;
     private Button createAccButton;
 
@@ -41,15 +40,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        searchButton.setOnClickListener(v -> {
-            Intent intent = SearchImageActivity.intentFactory(getApplicationContext());
-            startActivity(intent);
-        });
-
     }
 
     public void wireupButtons() {
-        searchButton = findViewById(R.id.search_button);
         loginButton = findViewById(R.id.login_button);
         createAccButton = findViewById(R.id.create_account_button);
     }
