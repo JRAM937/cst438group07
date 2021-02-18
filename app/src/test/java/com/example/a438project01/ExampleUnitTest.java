@@ -14,4 +14,20 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    //Test that username is created correctly
+    @Test
+    public void checkUsername() {
+        String username = "test";
+        Account testUser = new Account(username, "password");
+        assertEquals(testUser.getUsername(), username);
+    }
+
+    //Test that password is created correctly
+    @Test
+    public void checkPassword() {
+        String password = "password";
+        Account testUser = new Account("test", password);
+        assertEquals(testUser.getPassword(), password);
+    }
 }
