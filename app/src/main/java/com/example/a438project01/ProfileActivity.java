@@ -28,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView profileBio;
     private TextView pictures;
     private Button editProfile;
+    private Button backButton;
 
     private AccountDAO mAccountDAO;
     private Account mAccount;
@@ -66,6 +67,14 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = LandingActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void wireupDisplay() {
@@ -73,6 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileBio = findViewById(R.id.textViewBio);
         pictures = findViewById(R.id.text_view_result);
         editProfile = findViewById(R.id.editProfileButton);
+        backButton = findViewById(R.id.back_button_profile);
     }
 
     private String returnBio(Account acc) {

@@ -20,7 +20,7 @@
             android:id="@+id/logout_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log Out" />
+            android:text="@string/logoutButton" />
 
         <View
             android:id="@+id/divider"
@@ -44,7 +44,7 @@
             android:id="@+id/delete_acc_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete Account" />
+            android:text="@string/deleteAccButton" />
 
         <View
             android:id="@+id/divider3"
@@ -68,7 +68,7 @@
             android:id="@+id/noti_switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Notifications On/Off" />
+            android:text="@string/notifSlider" />
 
         <View
             android:id="@+id/divider5"
@@ -80,7 +80,7 @@
             android:id="@+id/e_egg_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Easter Egg! (Click Me)" />
+            android:text="@string/easterEggButton" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

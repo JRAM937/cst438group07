@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordInput;
     private Button loginButton;
     private Button guestButton;
+    private Button backButton;
 
     //Database objects
     private AccountDAO mAccountDAO;
@@ -116,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton = findViewById(R.id.loginButton2);
         guestButton = findViewById(R.id.guestButton);
+        backButton = findViewById(R.id.back_button_login);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,12 +151,19 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                // TODO: add a random name generator at some point. Low priority
                 editor.putString(USERNAME, "Rando Calrissian");
                 editor.putBoolean(GUEST, true);
                 editor.apply();
 
                 Intent intent = SearchImageActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MainActivity.intentFactory(getApplicationContext());
                 startActivity(intent);
             }
         });
