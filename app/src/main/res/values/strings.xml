@@ -17,6 +17,10 @@
     <string name="guestButton">Login as Guest</string>
     <string name="backButton">Back</string>
     <string name="changePassButton">Change Password</string>
+    <string name="logoutButton">Log Out</string>
+    <string name="deleteAccButton">Delete Account</string>
+    <string name="easterEggButton">Easter Egg! (Click Me)</string>
+    <string name="notifSlider">Notifications On/Off</string>
 
     <string name="searchBarText">Enter a thing here</string>
     <string name="searchButtonText">Search!</string>

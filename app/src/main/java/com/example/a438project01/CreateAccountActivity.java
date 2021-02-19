@@ -23,6 +23,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText usernameInput;
     private EditText passwordInput;
     private Button createAccountButton;
+    private Button backButton;
 
     private AccountDAO mAccountDAO;
     List<Account> mAccounts;
@@ -69,6 +70,15 @@ public class CreateAccountActivity extends AppCompatActivity {
                     Intent intent = LoginActivity.intentFactory(getApplicationContext());
                     startActivity(intent);
                 }
+            }
+        });
+
+        backButton = findViewById(R.id.back_button_create_acc);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MainActivity.intentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
     }
