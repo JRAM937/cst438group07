@@ -16,6 +16,7 @@
     <string name="settingsButton">Settings</string>
     <string name="guestButton">Login as Guest</string>
     <string name="backButton">Back</string>
+    <string name="changePassButton">Change Password</string>
 
     <string name="searchBarText">Enter a thing here</string>
     <string name="searchButtonText">Search!</string>

@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     //Database objects
     private AccountDAO mAccountDAO;
+    private Account mAccount;
     List< Account > mAccounts;
 
 
@@ -61,7 +64,13 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         String user = sharedPreferences.getString(USERNAME, "");
 
+        // Current Account. Use for editing values in the database. ex:
+        // mAccount.setPassword(newPass);
+        // mAccountDAO.update(mAccount);
+        mAccount = mAccountDAO.getUserByUsername(user);
+
         Button logoutButton = findViewById(R.id.logout_button);
+        Button changePassButton = findViewById(R.id.change_pass_button);
         Button deleteAccButton = findViewById(R.id.delete_acc_button);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +80,40 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        
+
+        changePassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder changePassAlert = new AlertDialog.Builder(SettingsActivity.this);
+                changePassAlert.setTitle("Change Password");
+                changePassAlert.setMessage("What would you like to change your password to?");
+
+                final EditText newPassword = new EditText(SettingsActivity.this);
+                // Sets textbox to be password input type
+                newPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                changePassAlert.setView(newPassword);
+
+                changePassAlert.setPositiveButton("Change Password", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        String newPass = newPassword.getText().toString();
+                        
+                        mAccount.setPassword(newPass);
+                        mAccountDAO.update(mAccount);
+                        Toast.makeText(SettingsActivity.this, "Password changed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                changePassAlert.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                });
+
+                changePassAlert.show();
+            }
+        });
         
         //Easter Egg that takes you to an interesting Pokemon video
         Button easterEgg = findViewById(R.id.e_egg_button);
