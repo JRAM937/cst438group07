@@ -134,9 +134,13 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     //Set noti to true
-                } else{
+                    mAccount.setNotif(true);
+                } else {
                     //set noti to false
+                    mAccount.setNotif(false);
                 }
+                //Update the settings for the current user
+                mAccountDAO.update(mAccount);
             }
         });
 
