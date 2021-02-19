@@ -25,7 +25,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     private Button createAccountButton;
 
     private AccountDAO mAccountDAO;
-    private Account mAccount;
     List<Account> mAccounts;
 
     @Override

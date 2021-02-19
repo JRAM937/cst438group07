@@ -28,13 +28,25 @@
             android:background="?android:attr/listDivider" />
 
         <Button
+            android:id="@+id/change_pass_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/changePassButton" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <Button
             android:id="@+id/delete_acc_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Delete Account" />
 
         <View
-            android:id="@+id/divider2"
+            android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
@@ -46,7 +58,7 @@
             android:text="@string/backButton" />
 
         <View
-            android:id="@+id/divider3"
+            android:id="@+id/divider4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
@@ -58,7 +70,7 @@
             android:text="Notifications On/Off" />
 
         <View
-            android:id="@+id/divider4"
+            android:id="@+id/divider5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
